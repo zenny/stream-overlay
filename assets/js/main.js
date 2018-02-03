@@ -12,11 +12,11 @@ $(document).ready(function() {
 
 				
 	//select element + get id
-	$('#content').bind('click', function(event) {
+	/*$('#content').bind('click', function(event) {
 		selectelement = event.target.id;
 		$(event.target).toggleClass("select");	
 		console.log(selectelement);
-	});
+	});*/
 	//Add block button
 	$('div.sidenav label.item-addblock').on("click", function() {
 		$("#content").append('<div id="menu" class="resize-drag context-menu pure-menu-heading"><div class="pure-menu"></div></div>');
