@@ -62,20 +62,15 @@ width: auto;
 }
 
 #menu {
-    margin-left: 150px;
+
     width: 150px;
 	height: 150px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+background-color: #191818;
     z-index: 1;
-    color: white;
-    overflow-y: auto;
+
+
 }
-#menu, .header {
-    background-color: #191818;
-}
+
 #menu:hover, #text:hover, img:hover, p:hover, .select {
 border: 2px solid rgba(81, 203, 238, 1);
 box-shadow: 0 0 5px rgba(81, 203, 238, 1);

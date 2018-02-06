@@ -1,22 +1,19 @@
 	var jsonfile = "default";
+	var selectelement;
 
-	$.urlParam = function(name){
-    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
-    if (results==null){
-       return null;
-    }
-    else{
-       return results[1] || 0;
-    }}
+
 $(document).ready(function() {
 
 				
 	//select element + get id
-	/*$('#content').bind('click', function(event) {
+	$('#content').bind('click', function(event) {
 		selectelement = event.target.id;
+		selectelement2 = '#'+event.target.id+'';
+		if (selectelement !== "content"){
 		$(event.target).toggleClass("select");	
+		}
 		console.log(selectelement);
-	});*/
+	});
 	//Add block button
 	$('div.sidenav label.item-addblock').on("click", function() {
 		$("#content").append('<div id="menu" class="resize-drag context-menu pure-menu-heading"><div class="pure-menu"></div></div>');
@@ -43,14 +40,13 @@ $(document).ready(function() {
 		});
 	}));
 	//remove button
-	$('div.sidenav label.item-remove ').bind("click", function() {	
+	$('div.sidenav label.item-remove ').bind("click", function(event) {	
 		if (selectelement === "content") {
 			alert("Cannot possible");
 		} 
 		else {
-			alert(selectelement);
-			console.log($.urlParam('test'));  
-            $("#content").remove(selectelement);
+			alert(selectelement2);
+            $(selectelement2).remove();
 		}
 	});
 	//Load layout via json
@@ -125,8 +121,11 @@ $(document).ready(function() {
 	
 	
 	//get option url
+
     var url = window.location.href;
+	url.match
     option = url.match(/json=(.*)/)[1];
+
     showDiv("content");
 	// restore layout with option url
     function showDiv(content) {
