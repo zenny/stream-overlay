@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.dropdown, #my-block2{
+.dropdown {
     max-height: 0px;
     display: none;
     line-height:100px;
@@ -14,10 +14,11 @@
 }
  
 /* le bloc est visible lorsque la checkbox est cochée */
-#toggle-block:checked + .dropdown, #toggle-block2:checked + .dropdown{
+#toggle-block:checked + .dropdown, #toggle-block2:checked + .dropdown, #toggle-block3:checked + .dropdown{
     max-height: 300px;
     display: block;
     transition: all 1s;
+	line-height:35px;
 }
 
 .sidenav {
@@ -31,7 +32,7 @@
     overflow-x: hidden;
 
 }
-.sidenav a, label, .link-obs, input, select {
+.sidenav a, label, .link-obs,  select {
    padding: 0;
     margin: 0;
     margin-left: .6em;
@@ -56,25 +57,52 @@ line-height:35px;
 }
 
 
-body {
-    background-color: white;
-width: auto;
+.body{
+background: -webkit-linear-gradient(90deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), -webkit-linear-gradient(0deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), -webkit-linear-gradient(90deg, rgba(0,0,0,0.13) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), -webkit-linear-gradient(0deg, rgba(0,0,0,0.12) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), rgba(226,226,226,1);
+  background: -moz-linear-gradient(0deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), -moz-linear-gradient(90deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), -moz-linear-gradient(0deg, rgba(0,0,0,0.13) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), -moz-linear-gradient(90deg, rgba(0,0,0,0.12) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), rgba(226,226,226,1);
+  background: linear-gradient(0deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), linear-gradient(90deg, rgba(0,0,0,0.3) 0, #FFFFFF 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 100%), linear-gradient(0deg, rgba(0,0,0,0.13) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), linear-gradient(90deg, rgba(0,0,0,0.12) 0, rgba(255,255,255,0.298039) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 100%), rgba(226,226,226,1);
+  background-position: -1px -1px;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+
 }
-
+body{
+	background-color: white;
+}
 #menu {
-
+    margin-left: 150px;
     width: 150px;
 	height: 150px;
-background-color: #191818;
+    top: 0;
+    left: 0;
+    bottom: 0;
     z-index: 1;
-
-
+    color: white;
+    overflow-y: auto;
 }
+div[id^=menu] {
+    width: 150px;
+	height: 150px;
+    top: 10;
+    left: 150;
+    z-index: 1;
+    overflow-y: auto;
+	background-color: rgba(25, 24, 24, 1);
+	
+}
+#menu, .header {
+    background-color: #191818;
+}
+div[id^=menu]:hover, #text:hover, img:hover, p:hover, .select {
 
-#menu:hover, #text:hover, img:hover, p:hover, .select {
-border: 2px solid rgba(81, 203, 238, 1);
-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  padding: 3px 0px 3px 3px;
+  -webkit-box-shadow:inset 0px 0px 0px 3px rgba(81, 203, 238, 1);
+    -moz-box-shadow:inset 0px 0px 0px 3px rgba(81, 203, 238, 1);
+    box-shadow:inset 0px 0px 0px 3px rgba(81, 203, 238, 1);
+
 
 }
 
@@ -120,4 +148,8 @@ margin-left: 0 !important;
 }
 .previews{
 	width: 10%;
+}
+img {
+    max-width: auto;
+    max-height: auto;
 }

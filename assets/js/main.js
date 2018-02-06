@@ -1,6 +1,7 @@
 	var jsonfile = "default";
 	var selectelement;
-
+	var blockcount = "0";
+	var imgcount = "0";
 
 $(document).ready(function() {
 
@@ -16,14 +17,16 @@ $(document).ready(function() {
 	});
 	//Add block button
 	$('div.sidenav label.item-addblock').on("click", function() {
-		$("#content").append('<div id="menu" class="resize-drag context-menu pure-menu-heading"><div class="pure-menu"></div></div>');
+		++blockcount;
+		$("#content").append('<div id="menu_'+ blockcount +'" class="resize-drag context-menu pure-menu-heading"></div>');
     });
 	//Upload img button
 	$('div.sidenav input.submit-img').on("click", function() {	
 		setTimeout(
 			function(){
 				var name = $('#file').val().split('\\').pop();
-				$(".content").append('<img class="pure-img resize-drag context-menu" id="image" src="upload/img/'+ name +'"/>');
+				++imgcount;
+				$(".content").append('<img class="pure-img resize-drag context-menu" id="image_'+ imgcount +'" src="upload/img/'+ name +'"/>');
 			}
 		, 1000); /* Delay 1000ms 1s */ 
 	});
@@ -58,9 +61,11 @@ $(document).ready(function() {
 		$.getJSON(json, function(data) {
             var html = '';
             $.each(data, function(key, value){
+				blockcount = value.blockcount;
+				imgcount = value.imgcount;
 				if (value.type === "DIV") {
 					if (value.id !== "content"){
-						html += '<div id="'+value.id+'" class="'+value.classname+'" style="transform:'+value.transform+'; z-index:'+value.zindex+'; width:'+value.width+'; height:'+value.height+';" data-y="'+value.data_y+'" data-x="'+value.data_x+'"></div>';
+						html += '<div id="'+value.id+'" class="'+value.classname+'" style="transform:'+value.transform+'; z-index:'+value.zindex+'; background-color:'+value.bgcolor+'; width:'+value.width+'; height:'+value.height+';" data-y="'+value.data_y+'" data-x="'+value.data_x+'"></div>';
 					}
 					else{
 						console.log("cant import content div");  
@@ -75,7 +80,7 @@ $(document).ready(function() {
 		alert("The Layout "+jsonfile+" is loaded");
     });
 	//Save layout to json
-	$("#uploadjson").on('submit',(function(e) {
+	$("#layout").on('submit',(function(e) {
 		e.preventDefault();
 		var a = document.body.appendChild(
 			document.createElement("a")
@@ -93,7 +98,11 @@ $(document).ready(function() {
 				width: this.style.width,
 				data_y: $(this).data('y'),
 				data_x: $(this).data('x'),
+				bgcolor: $(this).css("background-color"),
 				src: this.src,
+				blockcount: blockcount,
+				imgcount: imgcount,
+				
 			};
 			datas.push(data);
 			console.log(datas);
@@ -132,14 +141,18 @@ $(document).ready(function() {
 		$('div').hide();
         $('#' + "content").show();
 		$( "#content" ).removeClass( "content" ).addClass( "content2" );
+		$( "body" ).removeClass( "body" );
 		var directory = "upload/json/";
 		var json = directory + option + ".json";
 		$.getJSON(json, function(data) {
-            var html = '';
+            var html = '';			
             $.each(data, function(key, value){
+				blockcount = value.blockcount;
+				imgcount = value.imgcount;
 				if (value.type === "DIV") {
 					if (value.id !== "content"){
-						html += '<div id="'+value.id+'" class="'+value.classname+'" style="transform:'+value.transform+'; z-index:'+value.zindex+'; width:'+value.width+'; height:'+value.height+';" data-y="'+value.data_y+'" data-x="'+value.data_x+'"></div>';
+						html += '<div id="'+value.id+'" class="'+value.classname+'" style="transform:'+value.transform+'; z-index:'+value.zindex+'; background-color:'+value.bgcolor+'; width:'+value.width+'; height:'+value.height+';" data-y="'+value.data_y+'" data-x="'+value.data_x+'"></div>';
+
 					}
 					else{
 						console.log("cant import content div");  
@@ -158,4 +171,19 @@ $(document).ready(function() {
 
 
 });
+jQuery(document).ready(function($) {
+$("#color").spectrum({
+					color: "red",
+					flat: true,
+					allowEmpty:true,
+					showAlpha: true,
+					showInput: true,
+					showInitial: true, 
+clickoutFiresChange: false,
+				change: function(color) {
+					$(selectelement2).css('background-color',  color.toRgbString())
 
+				},
+
+				});
+});
