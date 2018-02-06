@@ -13,16 +13,16 @@ Stream-overlay is a site thats allow you to make an overlay for streaming softwa
 ### Requierement
 Just a webserver with php
 
-#### Stream-overlay use
+### Stream-overlay use
 **php** *for uploading image and json*, **html5**, **javascript/jquery** *"interact.js, spectrum.js, contextmenu.js"i remove in the future""*
 
 
 This version is not debugged, code is not clean.
 
-##### On the future i add
+### On the future i add
 * Text
 * Announcement: "Donation, subscribte .."
 * Maybe other
 
-###### Download
+### Download
 https://github.com/mangaultime/stream-overlay/releases
