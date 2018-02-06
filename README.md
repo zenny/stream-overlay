@@ -24,3 +24,5 @@ Text
 Announcement: "Donation, subscribte .."
 maybe other
 
+For download:
+https://github.com/mangaultime/stream-overlay/releases
