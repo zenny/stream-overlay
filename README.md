@@ -2,7 +2,7 @@
 
 Stream-overlay is a site thats allow you to make an overlay for streaming software like OBS/Xsplit. It work bit like StreamLabs but he require no account, you can run it locally and your data/overlays is belongs to you.
 
-## Function
+## Features
 * Add block and image
 * Drag and resize
 * Change block color
@@ -10,7 +10,7 @@ Stream-overlay is a site thats allow you to make an overlay for streaming softwa
 * Save/load your layout
 
 
-### Requierement
+### Requierements
 Just a webserver with php
 
 ### Stream-overlay use
