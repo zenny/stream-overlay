@@ -41,8 +41,8 @@ var zindexx = 1;
     // update the posiion attributes
     target.setAttribute('data-x', x);
     target.setAttribute('data-y', y);
-	$('.resize-drag ').css('z-index', '0');
-	target.style.zIndex = zindexx ;
+
+	target.style.zIndex = parseInt(new Date().getTime() / 1000);
 	
 
 	
@@ -69,21 +69,25 @@ interact('.resize-drag')
     onmove: window.dragMoveListener,
    snap: {
       targets: [
-        interact.createSnapGrid({ x: 10, y: 10 })
+        interact.createSnapGrid({ x: 5, y: 5 })
       ],
       range: Infinity,
       relativePoints: [ { x: 0, y: 0 } ]
     },
 restrict: {
       restriction: 'parent',
-	  elementRect: { left: 0, right: 0, top: 0, bottom: 0 },
+	  elementRect: { left: 0, right: 1, top: 0, bottom: 1 },
 
     },
 
 
   })
     .resizable({
-		
+		snap: {
+      targets: [ interact.createSnapGrid({ x: 5, y: 5 }) ],
+     range: Infinity,
+      relativePoints: [ { x: 0, y: 0 } ]
+    },
         // resize from all edges and corners
         edges: {
             left: true,
@@ -101,12 +105,16 @@ restrict: {
         // minimum size
         restrictSize: {
             min: {
-                width: 100,
-                height: 50
+                width: 2,
+                height: 2,
             },
         },
 
         inertia: false,
+		restrict: {
+      restriction: 'parent',
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+    },
     })
     .on('resizemove', function (event) {
         var target = event.target;
