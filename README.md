@@ -9,11 +9,13 @@ Stream-overlay is a site thats allow you to make an overlay for streaming softwa
 * Keep image proportion with "shift key"
 * Save/load your layout
 
+
 ### Requierements
 Just a webserver with php
 
 ### Stream-overlay use
 **php** *for uploading image and json*, **html5**, **javascript/jquery** *"interact.js, spectrum.js, contextmenu.js"i remove in the future""*
+
 
 This version is not debugged, code is not clean.
 
