@@ -1,6 +1,16 @@
+
+var jsonfile ; //define global variable jsonfile
+var selectelement; // define global variable selectelement
+var blockcount = "0"; // define global variable blockcount
+var imgcount = "0"; // define global variable imgcount
+var notecount = "0"; // define global variable notecount
+
+
 $(document).ready(function() {
+
+	buttonsave(); //load function
 	remove(); //load function
-	savelayout(); //load function
+	selectlayout(); //load function
 	selectelement(); //load function
 	putsize(); //load function
 	addblock(); //load function
@@ -8,17 +18,86 @@ $(document).ready(function() {
 	loadlayout(); //load function
 	changecolor(); //load function
 	urloption(); //load function
+
 });
 
-var jsonfile = "default"; //define global variable jsonfile
-var selectelement; // define global variable selectelement
-var blockcount = "0"; // define global variable blockcount
-var imgcount = "0"; // define global variable imgcount
+/*
+function autosave() {
+	
+    console.log(notecount);
+}
+
+window.onload = function() { 
+       
+    setInterval("save()",5000)
+
+}
+*/
+function notification(type,content){
+	notecount++;
+	$("#overlay").after('<div id="note_'+notecount+'" class="note '+type+'"><strong>'+content+'</strong></div>'); //Add the block
+	var note = "note_"+notecount+"";
+	setTimeout(function() {
+		$("#" + note).fadeOut('slow');
+		setTimeout(function() {
+			$("#" + note).remove();
+		}, 2000);
+	}, 4000);
+}
+
+function save () {
+	var datas = [];
+		if(jsonfile == undefined){
+			notification('warning', 'No layout selected, no save')
+		}
+		else{
+	 		$('div[class*="context-menu"], img[class*="context-menu"]').append(function() {
+			var data = { 
+				type: this.tagName,
+				id: this.id,
+				classname: this.className, 
+				height: this.style.height,
+				transform: this.style.transform,
+				zindex: this.style.zIndex,
+				width: this.style.width,
+				data_y: $(this).data('y'),
+				data_x: $(this).data('x'),
+				bgcolor: $(this).css("background-color"),
+				src: this.src,
+				blockcount: blockcount,
+				imgcount: imgcount,				
+			};
+			datas.push(data);
+			console.log(datas);
+			console.log(jsonfile);										
+			var datajson = JSON.stringify(datas);
+			$.ajax({
+				url: 'uploadjson.php',
+				data: {
+					data: datajson,
+					name: jsonfile,
+				},
+				dataType: "json",
+				type: "POST"    
+			});
+			});
+			notification('success', 'The layout '+jsonfile+' as been save')
+		}
+}
+
+function buttonsave () {
+		//Add block button
+	$('div.sidenav label.item-save').on("click", function() {
+	save()
+    });
+}
+
+
 
 function urloption() {
 		//Set option url
 	$('div.sidenav label.item-linkobs ').on("click", function() {	
-		window.location = window.location.href+'?json='+jsonfile;
+		window.location = window.location.pathname+'?json='+jsonfile;
 	});
 	//get option url
     var url = window.location.href;
@@ -58,7 +137,7 @@ function urloption() {
 
 function loadlayout() {
 		//Load layout via json
-	$("div.sidenav select.item-selectlayout").change(function(){
+	$("div.modal-body select.item-selectlayout").change(function(){
 		var selectedjson = $(".item-selectlayout option:selected").val();
 		var directory = "upload/json/";
 		var json = directory + selectedjson + ".json";
@@ -82,13 +161,13 @@ function loadlayout() {
             });
 			$('#content').html(html);
         });
-		alert("The Layout "+jsonfile+" is loaded");
+		notification('success', 'The layout '+jsonfile+' as been load')
     });
 }
 
 function addimg() {
 	//Upload img button
-	$('div.sidenav input.submit-img').on("click", function() {	
+	$('div.modal input.submit-img').on("click", function() {	
 		setTimeout(
 			function(){
 				var name = $('#file').val().split('\\').pop();
@@ -148,6 +227,7 @@ function putsize() {
 }
 
 
+
 function selectelement () {
 		//select element + get id
 	$('#content').bind('click', function(event) {
@@ -166,71 +246,49 @@ function selectelement () {
 function remove(){
 		//remove button
 	$('div.sidenav2 label.item-remove').bind("click", function(event) {	
-		if (selectelement === "content") { 
-			alert("Cannot possible to remove content"); // If content alert and dont remove
+		if (selectelement === "content") {  // If content alert and dont remove
+			notification('warning', 'You cant delete '+selectelement2+'')
 		} 
 		else {
 			if (selectelement == null) { //if selectelement is not defined alert
 			alert("No block selected");
 			} 
 			else{ //if remove
-				alert(''+selectelement2+' removed');
 				$(selectelement2).remove();
 				if (selectelement.indexOf('menu') != -1 ){ //if selectement element is block
-				--blockcount; //decrease block id each time is delete
+				//--blockcount; //decrease block id each time is delete
 				}
 				else {
-				--imgcount;	//decrease img id each time is delete
+				//--imgcount;	//decrease img id each time is delete
 				}
-			selectelement = undefined; //set selectelement to not defined
+				notification('info', 'The block '+selectelement+' as been delete')
+				selectelement = undefined; //set selectelement to not defined			
 		}
 		}
 	});
 }
 
-function savelayout() {
+
+
+function selectlayout() {
 	//Save layout to json
-	$("#layout").on('submit',(function(e) {
-		e.preventDefault();
-		var a = document.body.appendChild(
-			document.createElement("a")
-		);
-		var datas = [];
-		var select_value = $("#json").val();
-		$('div[class*="context-menu"], img[class*="context-menu"]').append(function() {
-			var data = { 
-				type: this.tagName,
-				id: this.id,
-				classname: this.className, 
-				height: this.style.height,
-				transform: this.style.transform,
-				zindex: this.style.zIndex,
-				width: this.style.width,
-				data_y: $(this).data('y'),
-				data_x: $(this).data('x'),
-				bgcolor: $(this).css("background-color"),
-				src: this.src,
-				blockcount: blockcount,
-				imgcount: imgcount,
-				
-			};
-			datas.push(data);
-			console.log(datas);
-			console.log(select_value);										
-			var datajson = JSON.stringify(datas);
-			$.ajax({
-				url: 'uploadjson.php',
-				data: {
-					data: datajson,
-					name: select_value,
-				},
-				dataType: "json",
-				type: "POST"    
-			});
-		console.log(datajson);
-		console.log(name);
-		});
-	}));
+	$('div.overlay button.size1').click(function(){	
+		if($("#json").val() == ""){
+			notification('warning', 'Please chose name before submit')
+		}
+		else{
+			jsonfile = $("#json").val();
+			window.location = '#overlay';
+		}
+	});
+	$('div.overlay a.btn-close').click(function(){	
+		if(jsonfile == undefined){
+			notification('warning', 'Please select a layout a create one')
+		}
+		else{
+			window.location = '#overlay';
+		}
+	});
 }
 
 function changecolor() {
@@ -241,11 +299,10 @@ function changecolor() {
 					showAlpha: true,
 					showInput: true,
 					showInitial: true, 
-clickoutFiresChange: false,
+					chooseText: "Done",
+					clickoutFiresChange: false,
 				change: function(color) {
 					$(selectelement2).css('background-color',  color.toRgbString())
-
 				},
-
-				});
+	});
 }

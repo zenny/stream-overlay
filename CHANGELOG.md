@@ -1,5 +1,20 @@
 ## Changelog ##
 
+### 2.1 (March 2th 2018) ###
+#### Add
+* Add save function to global function for futur autosave
+* Add notification system.
+* Add modal for layout and upload image.
+
+#### Modification
+* Some css cleanup.
+* Some js cleanup and optimization.
+
+
+#### Fixed
+* Some CSS fixe `Block position, Zindex`.
+
+
 ### 2.0 (February 12th 2018) ###
 #### Add
 * Add function to get block_id when selected.
