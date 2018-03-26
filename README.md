@@ -5,6 +5,7 @@ Stream-overlay is a site thats allow you to make an overlay for streaming softwa
 ### Features
 * Add block and image
 * Drag and resize
+** Keep image proportion with "shift key"
 * Change block color
 * Keep image proportion with "shift key"
 * Save/load your layout
