@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# [](#header-1)Features
+# [](#header-1)# [](#header-1)Features
 
 * Add Square, Trapézoid, Triangle ans Images
 * Drag, Resize and Rotate elements
@@ -10,6 +10,18 @@ layout: default
 * Change color of the element
 * Keep resize proportion "shift key"
 * Save/load your layout
+
+
+# [](#header-1)# [](#header-1)Requierements
+Just a webserver with **php** *for uploading image and json*, **html5**, **javascript/jquery** *"interact.js, spectrum.js, contextmenu.js"i remove in the future""*
+
+This version is not debugged, code is not clean.
+
+
+
+
+
+
 
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
