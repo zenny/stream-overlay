@@ -13,9 +13,9 @@ layout: default
 
 
 # [](#header-1)Requierements
-Just a webserver with **php** *for uploading image and json*, **html5**, **javascript/jquery** *"interact.js, spectrum.js, contextmenu.js"i remove in the future""*
+Web server with: HTML5, PHP5 and JAVASCRIPT that all.
 
-This version is not debugged, code is not clean.
+
 
 
 
