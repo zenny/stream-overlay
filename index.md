@@ -6,7 +6,7 @@ layout: default
 
 * Add Square, Trapézoid, Triangle ans Images
 * Drag, Resize and Rotate elements
-** Keep image proportion with "shift key"
+  * Keep image proportion with "shift key"
 * Change color of the element
 * Keep resize proportion "shift key"
 * Save/load your layout
