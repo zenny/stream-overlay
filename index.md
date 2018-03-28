@@ -27,7 +27,7 @@ Web server with: HTML5, PHP5 and JAVASCRIPT that all.
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[Link to another page](http://google.com).
+[Link to another page](another-page.md).
 
 There should be whitespace between paragraphs.
 
